@@ -35,4 +35,11 @@ public class SelectionSortTest {
         int[] result = selectionSort.sort(array);
         assertArrayEquals(result, new int[]{1, 2, 2, 3, 3, 5, 7, 8, 9, 10});
     }
+
+    @Test
+    public void sortTest5() {
+        int[] array = {2, 2, 3, 2, 1};
+        int[] result = selectionSort.sort(array);
+        assertArrayEquals(result, new int[]{1, 2, 2, 2, 3});
+    }
 }
