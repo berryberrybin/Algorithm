@@ -38,10 +38,12 @@ public class SetPractice {
 
         System.out.println(A.containsAll(B)); // false - B의 원소 전체 값이 A에 담겨있는가?
         System.out.println(A.containsAll(C)); // ture - C의 원소 전체 값이 A에 담겨있는가?
-
+        /*
         A.addAll(B); // A와 B를 합쳐서 A로 만든다 (합집합: 1, 2, 3, 4, 5)
         A.retainAll(B);//A집합과 B집합 모두 포함되는 값을 A에 담겠다 (교집합: 3)
         A.removeAll(B);//A에서 B를 뺀 차집합 (1, 2)
+
+         */
     }
 
 
