@@ -7,7 +7,7 @@ public class ConvertToBinary {
 
         int nextNumber;
         int remainder;
-        ArrayList<Integer> remainders = new <Integer>ArrayList();
+        ArrayList<Integer> remainders = new ArrayList<Integer>();
         while (true) {
             remainder = n % 2;
             nextNumber = n / 2;
