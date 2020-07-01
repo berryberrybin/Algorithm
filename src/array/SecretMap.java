@@ -2,7 +2,7 @@ package array;
 
 public class SecretMap {
     public String[] solve(int[] map1, int[] map2) {
-        int max = 0;
+        /*int max = 0;
         for (int i = 0; i < map1.length; i++) {
             if (max < map1[i]) {
                 max = map1[i];
@@ -21,17 +21,19 @@ public class SecretMap {
                 break;
             }
         } // 가장큰수를 2진수로 변환했을때 자리수가 mapsize.
-        int[][] solutionMap1 = new int[map1.length][mapSize];
+
+         */
+        int[][] solutionMap1 = new int[map1.length][map1.length];
         int nextNumber;
         for (int i = 0; i < map1.length; i++) {
-            solutionMap1[i][mapSize - i - 1] = map1[i] % 2;
+            solutionMap1[i][map1.length - i - 1] = map1[i] % 2;
             nextNumber = map1[i] / 2;
             map1[i] = nextNumber;
         }// map1을 돌면서 10진수를 2진수로 바꿔 solutionmap1 이중배열에 넣기
-        int[][] solutionMap2 = new int[map2.length][mapSize];
+        int[][] solutionMap2 = new int[map2.length][map2.length];
         int nextNumber2;
         for (int i = 0; i < map2.length; i++) {
-            solutionMap2[i][mapSize - i - 1] = map2[i] % 2;
+            solutionMap2[i][map2.length - i - 1] = map2[i] % 2;
             nextNumber = map2[i] / 2;
             map2[i] = nextNumber;
         }// map2를 돌면서 10진수를 2진수로 바꿔 solutionmap2 이중배열에 넣기
@@ -55,7 +57,7 @@ public class SecretMap {
             }
         }// solutionMap2에 0이 들어가 있지 않은 곳에 0 넣기
 
-        String[][] result = new String[mapSize][mapSize];
+        String[][] result = new String[map1.length][map1.length];
         for (int i = 0; i < solutionMap1.length; i++) {
             for (int j = 0; j < solutionMap1.length; j++) {
                 if (solutionMap1[i][j] == 0 && solutionMap2[i][j] == 0) {
@@ -65,14 +67,14 @@ public class SecretMap {
                 }
             }
         }// solution1 과 solution2 합치면서 둘다 0일때만 " " 넣기
-        String A = null;
-        String[] resultAnswer = new String[mapSize];
+        String A = "";
+        String[] resultAnswer = new String[map1.length];
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
                 A = A + result[i][j];
             }
             resultAnswer[i] = A;
-            A = null;
+            A = "";
         }
 
 
