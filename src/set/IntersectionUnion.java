@@ -13,12 +13,16 @@ public class IntersectionUnion {
             B.add(b[i]);
         }
         A.retainAll(B);
-        Integer[] result = new Integer[A.size()];
-        A.toArray(result);
+        int[] result = new int[A.size()];
+        int i = 0;
+        for (int number : A) {
+            result[i] = number;
+            i++;
+        }
         // a, b의 교집합, 오름차순 정렬해서 반환할 것
 
-        //return result;
-        return null;
+        return result;
+
     }
 
     public int[] union(int[] a, int[] b) {
@@ -31,12 +35,12 @@ public class IntersectionUnion {
             B.add(b[i]);
         }
         A.addAll(B);
-        Integer[] result = new Integer[A.size()];
         int[] unionResult = new int[A.size()];
-        A.toArray(result);
-        // a, b의 교집합, 오름차순 정렬해서 반환할 것
-        //return result;
-        // a, b의 합집합, 오름차순 정렬해서 반환할 것
-        return null;
+        int i = 0;
+        for (int number : A) {
+            unionResult[i] = number;
+            i++;
+        }
+        return unionResult;
     }
 }
