@@ -19,7 +19,8 @@ public class MaskingString {
         return result;
 
          */
-        String result2="";
+        /*
+        String result2 = "";
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == 'A' || s.charAt(i) == 'a') {
                 result2 = result2 + '*';
@@ -28,5 +29,11 @@ public class MaskingString {
             }
         }
         return result2;
+
+         */
+        s = s.replace('a', '*');
+        s = s.replace('A', '*');
+
+        return s;
     }
 }
