@@ -2,7 +2,7 @@ package string;
 
 public class RemoveString {
     public String remove(String s){
-        // ÀÔ·ÂµÈ ¹®ÀÚ¿­ sÀÇ Ã¹ ±ÛÀÚ¿Í ¸¶Áö¸· ±ÛÀÚ¸¦ »èÁ¦ÇÑ ÈÄ ¹İÈ¯ÇÑ´Ù.
+        // ì…ë ¥ëœ ë¬¸ìì—´ sì˜ ì²« ê¸€ìì™€ ë§ˆì§€ë§‰ ê¸€ìë¥¼ ì œê±°í•œ í›„ ë°˜í™˜í•œë‹¤.        
         return null;
     }
 }

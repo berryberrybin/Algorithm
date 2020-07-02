@@ -2,7 +2,7 @@ package string;
 
 public class MaskingString {
     public String masking(String s){
-        // ÀÔ·ÂµÈ ¹®ÀÚ¿­ Áß 'a'¿Í 'A' ¹®ÀÚ¸¦ '*'·Î º¯°æÇÏ¿© ¹İÈ¯ÇÑ´Ù.
+        // ì…ë ¥ëœ ë¬¸ìì—´ sì˜ 'A'ì™€ 'a' ë¬¸ìë¥¼ '*'ë¡œ ë³€ê²½í•˜ì—¬ ë°˜í™˜í•œë‹¤.
         return null;
     }
 }

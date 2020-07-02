@@ -2,7 +2,7 @@ package string;
 
 public class ReverseString {
     public String reverse(String s){
-        // ÀÔ·ÂµÈ ¹®ÀÚ¿­ s¸¦ ¹İ´ë·Î µÚÁı¾î ¹İÈ¯ÇÑ´Ù.
+        // ì…ë ¥ëœ ë¬¸ìì—´ së¥¼ ê±°ê¾¸ë¡œ ë³€í™˜í•˜ì—¬ ë°˜í™˜í•œë‹¤.
         return null;
     }
 }
