@@ -1,9 +1,24 @@
 package set;
 
+import java.util.HashSet;
+
 public class Lotto {
-    public int[] pick(){
-        // 랜덤한 로또 번호를 뽑는 메소드
-        // 로또 번호는 1부터 45까지 있으며 총 6개를 뽑아야 함
-        return null;
+    public int[] pick() {
+        HashSet<Integer> pickNumber = new HashSet();
+        while (true) {
+            double random = Math.random();
+            int number = (int) (random * 45) + 1;
+            pickNumber.add(number);
+            if (pickNumber.size() == 6) {
+                break;
+            }
+        }
+        int[] result = new int[pickNumber.size()];
+        int i = 0;
+        for (int number : pickNumber) {
+            result[i] = number;
+            i++;
+        }
+        return result;
     }
 }
