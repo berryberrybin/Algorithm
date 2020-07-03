@@ -1,7 +1,61 @@
 package array;
 
+import java.util.ArrayList;
+
 public class SecretMap {
+    public int Binary(int n) {
+        int nextNumber;
+        int remainder;
+        ArrayList<Integer> remainders = new ArrayList<Integer>();
+        while (true) {
+            remainder = n % 2;
+            nextNumber = n / 2;
+            remainders.add(remainder);
+            n = nextNumber;
+            if (n == 0) {
+                break;
+            }
+        }
+        int[] result = new int[remainders.size()];
+        int size = remainders.size();
+        for (int i = 0; i < size; i++) {
+            result[i] = remainders.get(size - i - 1);
+        }
+
+        String resultString = "";
+        for (int i = 0; i < result.length; i++) {
+            resultString = resultString + result[i];
+        }
+        int resultInt = Integer.parseInt(resultString);
+        return resultInt;
+    }
+
+
     public String[] solve(int[] map1, int[] map2) {
+
+        int map1Number;
+        int map2Number;
+        int sumNumber;
+        String sumString;
+        String[] result = new String[map1.length];
+        SecretMap test = new SecretMap();
+        for (int i = 0;i < map1.length; i++) {
+            map1Number = test.Binary(map1[i]);
+            map2Number = test.Binary(map2[i]);
+            sumNumber = map1Number + map2Number;
+            sumString = Integer.toString(sumNumber);
+            sumString = sumString.replace('0', ' ');
+            sumString = sumString.replace('1', '#');
+            sumString = sumString.replace('2', '#');
+            result[i] = sumString;
+        }
+        return result;
+    }
+}
+
+
+
+
         /*int max = 0;
         for (int i = 0; i < map1.length; i++) {
             if (max < map1[i]) {
@@ -22,7 +76,7 @@ public class SecretMap {
             }
         } // 가장큰수를 2진수로 변환했을때 자리수가 mapsize.
 
-         */
+
         int[][] solutionMap1 = new int[map1.length][map1.length];
         int nextNumber;
         for (int i = 0; i < map1.length; i++) {
@@ -87,6 +141,3 @@ public class SecretMap {
         전체 지도는 지도 1과 지도 2를 겹쳐 모두 0인 경우만 전체 지도에서 공백이고, 지도 1과 지도 2 중 하나라도 1(벽)이 있는 경우 벽이다.
         반환하는 값은 전체 지도이며 벽은 #으로 표현하고 공백은 ' '으로 표현한 String 배열을 반환한다.
          */
-        return resultAnswer;
-    }
-}
