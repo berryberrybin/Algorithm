@@ -12,10 +12,8 @@ public class LottoTest extends TestCase {
     public void pickTest() {
         int n = 10;
         Lotto lotto = new Lotto();
-        for (int i = 0; i < n; i++) {
-            int[] array = lotto.pick();
-            assertTrue("Wrong Lotto Number: " + Arrays.toString(array), isValid(array));
-        }
+        int[] array = lotto.pick();
+        assertTrue("Wrong Lotto Number: " + Arrays.toString(array), isValid(array));
     }
 
     private boolean isValid(int[] array) {
