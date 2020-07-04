@@ -15,7 +15,6 @@ public class SecretMapTest {
         /*
         #####
         # # #
-
         ### #
         #  ##
         #####
@@ -33,8 +32,9 @@ public class SecretMapTest {
         ###  #
         ##  ##
          ####
+         #####
         ### #
          */
-        assertArrayEquals(new String[]{"######", "###  #", "##  ##", " #### ", "### # "}, result);
+        assertArrayEquals(new String[]{"######", "###  #", "##  ##", " #### ", " #####", "### # "}, result);
     }
 }

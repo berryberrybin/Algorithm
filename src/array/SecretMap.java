@@ -3,7 +3,7 @@ package array;
 import java.util.ArrayList;
 
 public class SecretMap {
-    public int Binary(int n) {
+    public int convertToBinary(int n) {
         int nextNumber;
         int remainder;
         ArrayList<Integer> remainders = new ArrayList<Integer>();
@@ -38,15 +38,19 @@ public class SecretMap {
         int sumNumber;
         String sumString;
         String[] result = new String[map1.length];
-        SecretMap test = new SecretMap();
-        for (int i = 0;i < map1.length; i++) {
-            map1Number = test.Binary(map1[i]);
-            map2Number = test.Binary(map2[i]);
+        for (int i = 0; i < map1.length; i++) {
+            map1Number = convertToBinary(map1[i]);
+            map2Number = convertToBinary(map2[i]);
             sumNumber = map1Number + map2Number;
             sumString = Integer.toString(sumNumber);
             sumString = sumString.replace('0', ' ');
             sumString = sumString.replace('1', '#');
             sumString = sumString.replace('2', '#');
+            if (sumNumber < Math.pow(10, map1.length)) {
+                for (int j = 0; j < (map1.length - sumString.length()); j++) {
+                    sumString = ' ' + sumString;
+                }
+            }
             result[i] = sumString;
         }
         return result;
