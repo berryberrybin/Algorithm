@@ -1,13 +1,39 @@
 package algorithm;
 
 public class Tournament {
-    // 문제: https://programmers.co.kr/skill_checks/150823
     public int solution(int n, int a, int b) {
-        int answer = 3;
-
-        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-        System.out.println("Hello Java");
+        int min;
+        int max;
+        if (a < b) {
+            min = a;
+            max = b;
+        } else {
+            min = b;
+            max = a;
+        }
+        int maxRange = n;
+        for (int i = n; i > 2; i = i / 2) {
+            if (min <= (i / 2) && (i / 2) < max) {
+                maxRange = i;
+                break;
+            } else if (min > (i / 2) && (i / 2) < max) {
+                min = min - (i / 2);
+                max = max - (i / 2);
+            } else {
+                maxRange = i / 2;
+            }
+        }
+        int answer = 0;
+        for (int i = 2; i <= maxRange; i = i * 2) {
+            answer++;
+        }
 
         return answer;
+    }
+
+    public static void main(String[] args) {
+        Tournament tournament = new Tournament();
+        int result = tournament.solution(8, 1, 7);
+        System.out.println(result);
     }
 }
