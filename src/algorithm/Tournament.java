@@ -19,6 +19,7 @@ public class Tournament {
             } else if (min > (i / 2) && (i / 2) < max) {
                 min = min - (i / 2);
                 max = max - (i / 2);
+                maxRange = i/2;
             } else {
                 maxRange = i / 2;
             }
@@ -33,7 +34,7 @@ public class Tournament {
 
     public static void main(String[] args) {
         Tournament tournament = new Tournament();
-        int result = tournament.solution(8, 1, 7);
+        int result = tournament.solution(4, 3, 4);
         System.out.println(result);
     }
 }
