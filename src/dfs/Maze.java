@@ -1,6 +1,7 @@
 package dfs;
 
 public class Maze {
+    int moveCount = 0;
     int[][] map;
     boolean[][] visited;
     boolean find;
@@ -15,22 +16,24 @@ public class Maze {
         // 시작점: (0, 0)
         // 종료점: (n-1, n-1)
         visited[i][j] = true;
+        moveCount++;
         printMaze(i, j);
         if (i == map.length - 1 && j == map.length - 1) {
             find = true;
             System.out.println("찾았다.");
+            System.out.println(moveCount);
             return;
         }
-        if (j < map.length - 1 && map[i][j + 1] == 0 && visited[i][j + 1] == false && find == false) {
+        if (j < map.length - 1 && map[i][j + 1] == 0 && !visited[i][j + 1] && !find) {
             solution(i, j + 1);
         }
-        if (i < map.length - 1 && map[i + 1][j] == 0 && visited[i + 1][j] == false && find == false) {
+        if (i < map.length - 1 && map[i + 1][j] == 0 && !visited[i + 1][j] && !find) {
             solution(i + 1, j);
         }
-        if (i > 0 && map[i - 1][j] == 0 && visited[i - 1][j] == false && find == false) {
+        if (i > 0 && map[i - 1][j] == 0 && !visited[i - 1][j] && !find) {
             solution(i - 1, j);
         }
-        if (j > 0 && map[i][j - 1] == 0 && visited[i][j - 1] == false && find == false) {
+        if (j > 0 && map[i][j - 1] == 0 && !visited[i][j - 1] && !find) {
             solution(i, j - 1);
         }
     }
