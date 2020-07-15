@@ -12,14 +12,22 @@ public class Customer {
         bonusRatio = 0.01;
     }
 */
+    public Customer(){
+        initCustomer();
+    }
     public Customer(int customerID, String customerName){
         this.customerID = customerID;
         this.customerName = customerName;
+        initCustomer();
+        //customerGrade = "SILVER";
+        //bonusRatio = 0.01;
+    }
+    private void initCustomer(){
         customerGrade = "SILVER";
-        bonusRatio = 0.01;
+        bonusRatio=0.01;
     }
     public int calcPrice(int price) {
-        bonusPoint += (price * bonusRatio);
+        bonusPoint += price * bonusRatio;
         return price;
     }
     public String showCustomerInfo(){
