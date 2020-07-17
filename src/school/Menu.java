@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
     Scanner scanner = new Scanner(System.in);
-    static StudentList studentlist = new StudentList();
+    static StudentManager studentlist = new StudentManager();
 
     public void menuPrint() {
         System.out.println("====== 메뉴 ======");
@@ -15,20 +15,30 @@ public class Menu {
         System.out.println("5. 프로그램 종료");
         System.out.println("=================");
     }
-    public void menuSelect() {
-        System.out.println("메뉴를 선택하세요");
-        int selectNumber = scanner.nextInt();
 
-        switch (selectNumber) {
-            case 1:
-                studentlist.addStudent();
-            case 2:
-                studentlist.searchStudent();
-            case 3:
-                studentlist.changeContent();
-            case 4:
-                studentlist.deleteStudent();
-            case 5: menuExit();
+    public void menuSelect() {
+        while(true) {
+            menuPrint();
+            System.out.println("메뉴를 선택하세요");
+            int selectNumber = scanner.nextInt();
+
+            switch (selectNumber) {
+                case 1:
+                    studentlist.addStudent();
+                    break;
+                case 2:
+                    studentlist.searchStudent();
+                    break;
+                case 3:
+                    studentlist.changeContent();
+                    break;
+                case 4:
+                    studentlist.deleteStudent();
+                    break;
+                case 5:
+                    menuExit();
+                    break;
+            }
         }
 
     }

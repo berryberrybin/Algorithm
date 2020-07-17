@@ -3,9 +3,9 @@ package school;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentList {
-    static Menu menu = new Menu();
-    static Scanner scanner = new Scanner(System.in);
+public class StudentManager {
+    private Menu menu = new Menu();
+    private Scanner scanner = new Scanner(System.in);
     private ArrayList<Student> studentList = new ArrayList<>();
 
     public void addStudent() {
@@ -30,9 +30,6 @@ public class StudentList {
         Student student = new Student(studentName, studentId, studentDateOfBirth);
         studentList.add(student);
         System.out.println(studentName + "학생이 추가되었습니다");
-        menu.menuPrint();
-        menu.menuSelect();
-
     }
 
     public void searchStudent() {
@@ -43,24 +40,48 @@ public class StudentList {
         if (selectNumber == 1) {
             System.out.println("검색할 학생이름을 입력하세요.");
             String searchName = scanner.next();
-            int i = studentList.indexOf(searchName);
-            System.out.println(searchName + " 학생 정보 ");
-            System.out.println("학번 : " + studentList.get(i).getStudentId());
-            System.out.println("생년월일 : " + studentList.get(i).getStudentDateOfBirth());
+            Student result = findStudentByName(searchName);
+            if (result == null) {
+                System.out.println("검색 항목이 없습니다.");
+                return;
+            }
+            System.out.println(result.getStudentName() + " 학생 정보 ");
+            System.out.println("학번 : " + result.getStudentId());
+            System.out.println("생년월일 : " + result.getStudentDateOfBirth());
 
         } else if (selectNumber == 2) {
             System.out.println("검색할 학번을 입력하세요.");
             int searchId = scanner.nextInt();
-            int i = studentList.indexOf(searchId);
-            System.out.println(searchId + " 학번 정보 ");
-            System.out.println("이름 : " + studentList.get(i).getStudentName());
-            System.out.println("생년월일 : " + studentList.get(i).getStudentDateOfBirth());
+            Student result = findStudentById(searchId);
+            if (result == null) {
+                System.out.println("검색 항목이 없습니다.");
+                return;
+            }
 
-        } else{
+            System.out.println(searchId + " 학번 정보 ");
+            System.out.println("이름 : " + result.getStudentName());
+            System.out.println("생년월일 : " + result.getStudentDateOfBirth());
+        } else {
             searchStudent();
         }
-        menu.menuPrint();
-        menu.menuSelect();
+    }
+
+    public Student findStudentByName(String studentName){
+        for(Student student : studentList){
+            if(student.getStudentName().equals(studentName)){
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public Student findStudentById(int studentId) {
+        for (Student student : studentList) {
+            if (student.getStudentId() == studentId) {
+                return student;
+            }
+        }
+        return null;
     }
 
     public void changeContent() {
@@ -71,45 +92,49 @@ public class StudentList {
         if (selectNumber == 1) {
             System.out.println("변경하고 싶은 학생 이름을 입력하세요.");
             String searchName = scanner.next();
-            int i = studentList.indexOf(searchName);
+            Student result = findStudentByName(searchName);
+            if (result == null) {
+                System.out.println("검색 항목이 없습니다.");
+                return;
+            }
             System.out.println("수정할 이름을 입력하세요. ");
             String changeName = scanner.next();
-            studentList.get(i).setStudentName(changeName);
-            System.out.println(searchName+" >> "+changeName+" 으로 변경되었습니다.");
-        }
-        else if(selectNumber==2){
+            result.setStudentName(changeName);
+            System.out.println(searchName + " >> " + changeName + " 으로 변경되었습니다.");
+        } else if (selectNumber == 2) {
             System.out.println("변경하고 싶은 학번을 입력하세요.");
             int searchId = scanner.nextInt();
-            int i = studentList.indexOf(searchId);
+            Student result = findStudentById(searchId);
+            if (result == null) {
+                System.out.println("검색 항목이 없습니다.");
+                return;
+            }
             System.out.println("수정할 학번 입력하세요. ");
             int changeId = scanner.nextInt();
-            studentList.get(i).setStudentId(changeId);
-            System.out.println(searchId+" >> "+changeId+" 으로 변경되었습니다.");
-        }
-        else if(selectNumber==3){
+            result.setStudentId(changeId);
+            System.out.println(searchId + " >> " + changeId + " 으로 변경되었습니다.");
+        } else if (selectNumber == 3) {
             System.out.println("변경하고 싶은 학생을 입력하세요.");
             String searchName = scanner.next();
-            int i = studentList.indexOf(searchName);
+            Student result = findStudentByName(searchName);
+            if (result == null) {
+                System.out.println("검색 항목이 없습니다.");
+                return;
+            }
             System.out.println("수정할 생년월일 입력하세요. ");
             int changeDateOfBirth = scanner.nextInt();
-            studentList.get(i).setStudentDateOfBirth(changeDateOfBirth);
-            System.out.println(searchName+"의 생년월일이 "+changeDateOfBirth+" 으로 변경되었습니다.");
-        }
-        else{
+            result.setStudentDateOfBirth(changeDateOfBirth);
+            System.out.println(searchName + "의 생년월일이 " + changeDateOfBirth + " 으로 변경되었습니다.");
+        } else {
             changeContent();
         }
-        menu.menuPrint();
-        menu.menuSelect();
-
     }
-    public void deleteStudent(){
+
+    public void deleteStudent() {
         System.out.println("삭제하고 싶은 학생 이름을 입력하세요.");
         String searchName = scanner.next();
-        int i = studentList.indexOf(searchName);
-        studentList.remove(i);
-        System.out.println(searchName +"학생이 삭제 되었습니다.");
-        menu.menuPrint();
-        menu.menuSelect();
+        Student result = findStudentByName(searchName);
+        studentList.remove(result);
+        System.out.println(searchName + "학생이 삭제 되었습니다.");
     }
-
 }
