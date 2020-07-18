@@ -1,45 +1,37 @@
 package algorithm;
 
-import java.util.HashSet;
-
 public class Tiling {
-    public int solution(int n) {
-        int answer = 1;
-        HashSet<String> tile1 = new HashSet<>();
-        HashSet<String> tile2 = new HashSet<>();
-        HashSet<String> tile3 = new HashSet<>();
-
-        if (n == 1) {
-            return 1;
-        } else if (n == 2) {
-            return 2;
-        } else {
-            tile1.add("a");
-            tile2.add("aa");
-            tile2.add("b");
-            for (int i = 2; i < n; i++) {
-                tile3=new HashSet<>();
-                for (String tile : tile1) {
-                    tile3.add(tile + "b");
-                    tile3.add("b" + tile);
-                }
-                for (String tile : tile2) {
-                    tile3.add(tile + "a");
-                    tile3.add("a" + tile);
-                }
-                tile1 = tile2;
-                tile2 = tile3;
-            }
+    public long combination(int a, int b) {
+        long aFactorial = 1;
+        long sumFactorial = 1;
+        for (int i = 1; i <= Math.min(a, b); i++) {
+            aFactorial = aFactorial * i;
+            aFactorial %= 1000000007;
         }
-        answer = tile3.size();
-        return answer;
+        for (int i = (a + b); i > Math.max(a, b); i--) {
+            sumFactorial = sumFactorial * i;
+            sumFactorial %= 1000000007;
+        }
+        return (sumFactorial / aFactorial) % 1000000007;
+    }
+
+    public int solution(int n) {
+        int wRectangle = n / 2;
+        long answer = 0;
+        for (int i = 1; i <= wRectangle; i++) {
+            int hRectangle = n - (2 * i);
+            answer = answer + combination(i, hRectangle);
+            answer = answer % 1000000007;
+        }
+
+        return (int) answer + 1;
     }
 
     public static void main(String[] args) {
         Tiling tiling = new Tiling();
-        int n = 5;
+        int n = 12;
         int answer = tiling.solution(n);
         System.out.println(answer);
     }
 }
-https://programmers.co.kr/learn/courses/30/lessons/12900
+// https://programmers.co.kr/learn/courses/30/lessons/12900
