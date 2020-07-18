@@ -1,35 +1,29 @@
 package algorithm;
 
 public class Tiling {
-    public long combination(int a, int b) {
-        long aFactorial = 1;
-        long sumFactorial = 1;
-        for (int i = 1; i <= Math.min(a, b); i++) {
-            aFactorial = aFactorial * i;
-            aFactorial %= 1000000007;
-        }
-        for (int i = (a + b); i > Math.max(a, b); i--) {
-            sumFactorial = sumFactorial * i;
-            sumFactorial %= 1000000007;
-        }
-        return (sumFactorial / aFactorial) % 1000000007;
-    }
-
     public int solution(int n) {
-        int wRectangle = n / 2;
         long answer = 0;
-        for (int i = 1; i <= wRectangle; i++) {
-            int hRectangle = n - (2 * i);
-            answer = answer + combination(i, hRectangle);
-            answer = answer % 1000000007;
+        long a=1;
+        long b=2;
+        long c=0;
+        if(n==1){
+            answer = 1;
+        } else if(n==2){
+            answer = 2;
+        } else{
+            for(int i=3;i<=n;i++){
+                c = (a+b)%1000000007;
+                a=b;
+                b=c;
+            }
+            answer = c;
         }
-
-        return (int) answer + 1;
+        return (int)answer;
     }
 
     public static void main(String[] args) {
         Tiling tiling = new Tiling();
-        int n = 12;
+        int n = 3;
         int answer = tiling.solution(n);
         System.out.println(answer);
     }
