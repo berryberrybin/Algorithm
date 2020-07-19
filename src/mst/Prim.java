@@ -1,57 +1,40 @@
 package mst;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Prim {
-    private int[][] convertEdgesToCostArray(int[][] edges, int N) {
-        int[][] result = new int[N][N];
-        for (int i = 0; i < edges.length; i++) {
-            for (int j = 0; j < 3; j++) {
-                result[(edges[i][0]) - 1][(edges[i][1]) - 1] = edges[i][2];
-                result[(edges[i][1]) - 1][(edges[i][0]) - 1] = edges[i][2];
-            }
-        }
-        return result;
-    }
 
     public int findMst(int[][] edges, int N) {
+        // edges: [[start, end, cost], [start, end, cost]...]
         int sumCost = 0;
-        boolean[] vertex = new boolean[N];
+        Set<Integer> visited = new HashSet<>();
         int[][] costArray = convertEdgesToCostArray(edges, N);
-        vertex[0] = true;
-        int min = Integer.MAX_VALUE;
-        int nextVertex = 0;
-        for (int i = 0; i < N; i++) {
-            min = Integer.MAX_VALUE;
-            for (int k = 0; k < N; k++) {
-                if (!vertex[k]) {
-                    continue;
-                }
+        visited.add(0);
+        while (visited.size() < N) {
+            int nextVertex = 0;
+            int min = Integer.MAX_VALUE;
+            for (int k : visited) {
                 for (int j = 0; j < costArray[k].length; j++) {
-                    if (vertex[j]) {
-                        continue;
-                    }
-                    if (costArray[k][j] != 0 && costArray[k][j] < min) {
+                    if (!visited.contains(j) && costArray[k][j] != 0 && costArray[k][j] < min) {
                         min = costArray[k][j];
                         nextVertex = j;
                     }
                 }
             }
             sumCost = sumCost + min;
-            vertex[nextVertex] = true;
-            boolean isDone = true;
-            for (int m = 0; m < N; m++) {
-                if (!vertex[m]) {
-                    isDone = false;
-                }
-            }
-            if (isDone) {
-                break;
-            }
+            visited.add(nextVertex);
         }
-
-        // edges: [[start, end, cost], [start, end, cost]...]
-        // Array
-
         return sumCost;
+    }
+
+    private int[][] convertEdgesToCostArray(int[][] edges, int N) {
+        int[][] result = new int[N][N];
+        for (int[] edge : edges) {
+            result[(edge[0]) - 1][(edge[1]) - 1] = edge[2];
+            result[(edge[1]) - 1][(edge[0]) - 1] = edge[2];
+        }
+        return result;
     }
 
     public static void main(String[] args) {
@@ -66,14 +49,14 @@ public class Prim {
                 {3, 5, 7},
                 {4, 5, 8}
         };
-        int[][] result = prim.convertEdgesToCostArray(edges, 5);
+        int[][] result = prim.convertEdgesToCostArray(edges, N);
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
                 System.out.print(result[i][j]);
             }
             System.out.println();
         }
-        int answer = prim.findMst(edges, 5);
+        int answer = prim.findMst(edges, N);
         System.out.println("합계 : " + answer);
     }
 }
