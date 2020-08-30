@@ -46,20 +46,52 @@ public class BinTree<K, V> {
     // 키 값으로 검색하는 search 메서드 구현
     public V search(K key) {
         Node<K, V> p = root;
-        while(true){
-            if(p==null){ // p가 null이면 검색 실패
+        while (true) {
+            if (p == null) { // p가 null이면 검색 실패
                 return null;
             }
             int cond = comp(key, p.getKey()); //key와 노드 p의 key값을 비교
-            if(cond==0){ // 값이 같으면 겁색 성공
+            if (cond == 0) { // 값이 같으면 겁색 성공
                 return p.getValue();
-            } else if(cond<0){ // key가 작으면 왼쪽 서브 트리에서 검색
+            } else if (cond < 0) { // key가 작으면 왼쪽 서브 트리에서 검색
                 p = p.left;
-            } else{ // key가 크면 오른쪽 트리에서 검색
+            } else { // key가 크면 오른쪽 트리에서 검색
                 p = p.right;
             }
 
         }
     }
 
+    // 노드를 삽입하는 add 메서드 추가
+    // 1) node를 루트로 하는 서브트리에 노드 <K,V> 삽입
+    private void addNode(Node<K, V> node, K key, V data) { //선택하는 노드를 node라고 함.
+        // 삽입할 키와 node의 키 값을 비교
+        int cond = comp(key, node.getKey()); // 값이 같다면 삽입 실패
+        if (cond == 0) {
+            return;
+        } else if (cond < 0) { // key값이 삽입 값보다 작을 경우
+            if (node.left == null) { // 왼쪽 자식이 없다면 노드 삽입
+                node.left = new Node<K, V>(key, data, null, null);
+            } else {
+                addNode(node.left, key, data); // 선택된 노드를 왼쪽 자식 노드로 옮겨서 다시 본다.
+            }
+        } else { // key값이 삽입 값보다 클 경우
+            if (node.right == null) { // 오른쪽 자식 노드가 없는 경우
+                node.right = new Node<K, V>(key, data, null, null);
+            } else {
+                addNode(node.right, key, data); // 선택된 노드를 오른쪽 자식 노드로 옮겨서 다시 본다.
+            }
+        }
+    }
+
+    // 2) 노드 삽입
+    public void add(K key, V data) {
+        if (root == null) { // root가 null일 경우
+            root = new Node<K, V>(key, data, null, null);
+        } else {
+            addNode(root, key, data); //트리가 비어있지 않으면 메서드 addNode를 호출하여 노드 삽입
+        }
+    }
 }
+
+
