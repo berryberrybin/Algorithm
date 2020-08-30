@@ -159,5 +159,31 @@ public class BinTree<K, V> {
         }
         return true;
     }
+
+    // 노드의 킥밧의 오름차순으로 출력
+    private void printSubTree(Node node) {
+        if (node != null) {
+            printSubTree(node.left);
+            System.out.println(node.key + " " + node.data);
+            printSubTree(node.right);
+        }
+    }
+
+    public void print() {
+        printSubTree(root);
+    }
+
+    public static void main(String[] args) {
+        BinTree<Integer, String> binTree = new BinTree<>();
+        binTree.add(1, "one");
+        binTree.add(10, "ten");
+        binTree.add(3, "three");
+        binTree.add(5, "five");
+        binTree.add(4, "four");
+        binTree.add(7, "seven");
+        binTree.add(8, "eight");
+        binTree.add(2, "two");
+        binTree.print();
+    }
 }
 
