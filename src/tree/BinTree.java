@@ -92,6 +92,72 @@ public class BinTree<K, V> {
             addNode(root, key, data); //트리가 비어있지 않으면 메서드 addNode를 호출하여 노드 삽입
         }
     }
-}
 
+    public boolean remove(K key) {
+        Node<K, V> p = root; // 현재 보고 있는 노드 (삭제할 노드와 비교대상)
+        Node<K, V> parent = null; // 현재 보고 있는 노드의 부모 노드
+        boolean isLeftChild = true; // p는 부모의 왼쪽 자식 노드인가?
+
+        // 실제 삭제할 key 검색
+        while (true) {
+            if (p == null) { // 더이상 진행되지 않으며,
+                return false; // 삭제할 key 값이 없다.
+            }
+            int cond = comp(key, p.getKey()); // key와 현재 보고 있는 노드(p)의 key값 비교
+            if (cond == 0) { // 삭제할 key값 검색 성공
+                break;
+            } else {
+                parent = p; // 가지로 내려가지 전에 부모 저장
+                if (cond < 0) { // p.getKey()보다 삭제할 key값이 작으면 왼쪽 자식으로 내려감
+                    isLeftChild = true;
+                    p = p.left;
+                } else { // 삭제할 key값이 크면 오른쪽 자식으로 내려감
+                    isLeftChild = false;
+                    p = p.right;
+                }
+            }
+        }
+        //1. 삭제할 노드의 왼쪽 자식이 없을 경우
+        if (p.left == null) {
+            if (p == root) { // a. 삭제할 노드가 root이면, 삭제할 노드의 오른쪽을 root로 바꿔 줌
+                root = p.right;
+            } else if (isLeftChild) { // b. 삭제할 노드가 부모의 왼쪽 자식일 경우
+                parent.left = p.right; // 부모의 왼쪽을 삭제할 노드의 오른쪽 자식과 연결
+            } else { // c. 삭제할 노드가 부모의 오른쪽 자식일 경우
+                parent.right = p.right; // 부모의 오른쪽을 삭제할 노드의 오른쪽 자식과 연결
+            }
+            // 2. 삭제할 노드의 오른쪽 자식이 없을 경우
+        } else if (p.right == null) {
+            if (p == root) {
+                root = p.left;
+            } else if (isLeftChild) {
+                parent.left = p.left;
+            } else {
+                parent.right = p.left;
+            }
+            // 3. 삭제할 노드의 자식이 2개일 경우
+        } else {
+            // "왼쪽"서브트리(p.left)에서 가장 큰 키값(가장 오른쪽에 위치)을 갖는 노드를 검색
+            parent = p;
+            Node<K, V> MaxNodeOfLeftSubTree = p.left;
+            isLeftChild = true;
+            while (MaxNodeOfLeftSubTree.right != null) {
+                parent = MaxNodeOfLeftSubTree;
+                MaxNodeOfLeftSubTree = MaxNodeOfLeftSubTree.right;
+                isLeftChild = false;
+            }
+            // MaxNodeOfLeftSubTree를 삭제 위치로 옮김
+            p.key = MaxNodeOfLeftSubTree.key;
+            p.data = MaxNodeOfLeftSubTree.data;
+
+            // 옮긴 노드의 자식 포인터 재구성
+            if (isLeftChild) {
+                parent.left = MaxNodeOfLeftSubTree.left;
+            } else {
+                parent.right = MaxNodeOfLeftSubTree.left;
+            }
+        }
+        return true;
+    }
+}
 
