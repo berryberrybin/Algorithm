@@ -1,8 +1,6 @@
 package sort;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 // 타입에 따라 정렬 : 자바 내부에 있는 정렬 메소드인 "Arrays.sort(비교할 객체명, new Comparator<객체의타입>() )"를 사용
 // Comparator 인터페이스 이므로 추상메서드인 compare를 override 해주어야 함 - 어떤 방식으로 정렬을 할지
 
@@ -34,8 +32,23 @@ public class InternalSort {
                 return o1.getB().compareTo(o2.getB())*-1;
             }
         });
+        Comparator<Custom> c = new Comparator<Custom>() {
+            @Override
+            public int compare(Custom o1, Custom o2) {
+                return o1.getB().compareTo(o2.getB())*-1;
+            }
+        } ;
+        Set<Custom> treeSet = new TreeSet<Custom>(c);
+        for(Custom custom:customArray){
+            treeSet.add(custom);
+        }
+
+        treeSet.add(new Custom(999,"zzz"));
+        for(Custom custom : treeSet){
+            System.out.println(custom);
+        }
     }
-    static class Custom {
+    static class Custom implements Comparable<Custom> {
         int a;
         String b;
 
@@ -62,6 +75,19 @@ public class InternalSort {
         @Override
         public int hashCode() {
             return Objects.hash(a, b);
+        }
+
+        @Override
+        public String toString() {
+            return "Custom{" +
+                    "a=" + a +
+                    ", b='" + b + '\'' +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(Custom o) {
+            return b.compareTo(o.getB())*-1;
         }
     }
 
