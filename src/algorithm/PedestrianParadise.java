@@ -26,25 +26,14 @@ public class PedestrianParadise {
                 }
                 int iReplace = i - 1;
                 int jReplace = j - 1;
-                while (jReplace >= 0 && cityMap[i][jReplace] == 2) {
+                while (jReplace >= 0 && cityMap[i][jReplace] == 2){
                     jReplace--;
-                }
-                while (iReplace >= 0 && cityMap[iReplace][j] == 2) {
+                };
+                while (iReplace >= 0 && cityMap[iReplace][j] == 2){
                     iReplace--;
-                }
-                int left;
-                int up;
-
-                if (jReplace < 0) {
-                    up = 0;
-                } else {
-                    up = numberOfCase[i][jReplace];
-                }
-                if (iReplace < 0) {
-                    left = 0;
-                } else {
-                    left = numberOfCase[iReplace][j];
-                }
+                };
+                int left = (jReplace < 0) ? 0 : numberOfCase[i][jReplace];
+                int up = (iReplace < 0) ? 0 : numberOfCase[iReplace][j];
                 numberOfCase[i][j] = (left % MOD + up % MOD) % MOD;
             }
         }
@@ -55,12 +44,12 @@ public class PedestrianParadise {
 
     public static void main(String[] args) {
         PedestrianParadise pedestrianparadise = new PedestrianParadise();
-        int m = 497;
+        int m = 3;
         int n = 3;
-        int [][] cityMap = new int[m][n];
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                cityMap[i][j]=0;
+        int[][] cityMap = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                cityMap[i][j] = 0;
             }
         }
         System.out.println(pedestrianparadise.solution(m, n, cityMap));

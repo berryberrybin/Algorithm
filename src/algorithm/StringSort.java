@@ -32,4 +32,4 @@ public class StringSort {
         }
     }
 }
-// kthCharToInt가 같을때 재정렬 필요.
+// https://programmers.co.kr/learn/courses/30/lessons/12915

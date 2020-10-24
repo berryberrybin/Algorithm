@@ -3,7 +3,22 @@ package algorithm;
 import java.util.Arrays;
 
 public class Network {
-    public int[] initializeConnectionResult(int n) {
+    public int solution(int n, int[][] computers) {
+        int[] connectionResult = initializeConnectionResult(n);
+
+        for (int start = 0; start < n; start++) {
+            for (int i = 0; i < n; i++) {
+                if (start < i && computers[start][i] != 0) {
+                    connectionResult = groupingNetwork(connectionResult, connectionResult[i], connectionResult[start]);
+                }
+            }
+        }
+        int answer = differentNumberCount(connectionResult);
+
+        return answer;
+    }
+
+    private int[] initializeConnectionResult(int n) {
         int[] connectionResult = new int[n];
         for (int i = 0; i < n; i++) {
             connectionResult[i] = i;
@@ -11,7 +26,7 @@ public class Network {
         return connectionResult;
     }
 
-    public int[] existNetwork(int[] connectionResult, int checkNumber, int changeNumber) {
+    private int[] groupingNetwork(int[] connectionResult, int checkNumber, int changeNumber) {
         for (int i = 0; i < connectionResult.length; i++) {
             if (connectionResult[i] == checkNumber) {
                 connectionResult[i] = changeNumber;
@@ -20,7 +35,7 @@ public class Network {
         return connectionResult;
     }
 
-    public int differentNumberCount(int[] connectionResult) {
+    private int differentNumberCount(int[] connectionResult) {
         int count = 1;
         Arrays.sort(connectionResult);
         for (int i = 0; i < connectionResult.length - 1; i++) {
@@ -29,21 +44,6 @@ public class Network {
             }
         }
         return count;
-    }
-
-    public int solution(int n, int[][] computers) {
-        int[] connectionResult = initializeConnectionResult(n);
-
-        for(int start = 0;start<n;start++) {
-            for (int i = 0; i < n; i++) {
-                if (start < i && computers[start][i] != 0) {
-                    connectionResult = existNetwork(connectionResult, connectionResult[i], connectionResult[start]);
-                }
-            }
-        }
-        int answer = differentNumberCount(connectionResult);
-
-        return answer;
     }
 
     public static void main(String[] args) {

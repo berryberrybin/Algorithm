@@ -25,7 +25,7 @@ public class Maze {
             return;
         }
         if (j < map.length - 1 && map[i][j + 1] == 0 && !visited[i][j + 1] && !find) {
-            solution(i, j + 1);
+            solution(i, j  + 1);
         }
         if (i < map.length - 1 && map[i + 1][j] == 0 && !visited[i + 1][j] && !find) {
             solution(i + 1, j);

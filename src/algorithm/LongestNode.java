@@ -60,7 +60,6 @@ public class LongestNode {
         return count;
     }
 
-
     public int[][] distanceInformation(int[][] edge) {
         distance = new int[n][n];
 

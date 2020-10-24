@@ -1,6 +1,6 @@
 package queen;
 
-public class queenPractice {
+public class QueenPractice {
     static int count =0;
     static boolean[] flag_a = new boolean[8];
     static boolean[] flag_b = new boolean[15];

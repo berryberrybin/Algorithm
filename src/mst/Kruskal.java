@@ -63,13 +63,7 @@ public class Kruskal {
         Kruskal kruskal = new Kruskal();
         int N = 5;
         int[][] edges = new int[][]{
-                {1, 2, 4},
-                {1, 5, 3},
-                {2, 3, 5},
-                {2, 5, 2},
-                {3, 4, 4},
-                {3, 5, 7},
-                {4, 5, 8}
+                {0,1,1},{0,2,2},{1,2,5},{1,3,1},{2,3,8}
         };
         int answer = kruskal.findMst(edges, N);
         System.out.println("합계 : " + answer);
